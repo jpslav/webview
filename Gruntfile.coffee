@@ -202,6 +202,24 @@ module.exports = (grunt) ->
           # Remove empty directories
           return fs.readdirSync(filepath).length is 0
 
+    #Compress
+    compress:
+      dist:
+        options:
+            mode: 'gzip'
+        files: 
+          [
+            expand: true
+            flatten: true
+            src: ['dist/scripts/*']
+            dest: 'dist/scripts/'
+          ,
+            expand: true
+            flatten: true
+            src: ['dist/data/*']
+            dest: 'dist/data/'
+          ]
+
     # Uglify
     uglify:
       dist:
