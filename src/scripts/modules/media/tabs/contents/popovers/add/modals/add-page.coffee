@@ -11,6 +11,8 @@ define (require) ->
   require('bootstrapTransition')
   require('bootstrapModal')
 
+  WORKSPACE_URI = "#{location.origin}/users/contents"
+
   return class AddPageModal extends BaseView
     template: template
     _checkedCounter: 0
@@ -21,6 +23,7 @@ define (require) ->
     events:
       'click .new-page': 'newPage'
       'click .search-pages': 'onSearch'
+      'click .draft-pages': 'drafts'
       'submit form': 'onSubmit'
       'change form': 'onChange'
       'focus .page-title': 'onFocusSearch'
@@ -80,6 +83,12 @@ define (require) ->
       @_checkedCounter = 0
       results = searchResults.load({query: "?q=title:#{title}%20type:page"})
       @regions.results.show(new AddPageSearchResultsView({model: results}))
+
+    drafts: () ->
+      @_checkedCounter = 0
+      results = searchResults.load({url:"#{WORKSPACE_URI}?media_type=application/vnd.org.cnx.module&state=Draft&contained_in=not:#{@model.id}"})
+      @regions.results.show(new AddPageSearchResultsView({model: results}))
+
 
     updateUrl: () ->
       # Update the url bar path

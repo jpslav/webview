@@ -29,7 +29,6 @@ define (require) ->
       super()
 
       @model = searchResults.config
-        query: "?authorID:#{session.get('id')}"
         url: WORKSPACE_URI
 
       @listenTo(@model, 'change:error', @displayError)
