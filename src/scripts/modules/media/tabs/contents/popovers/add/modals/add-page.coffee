@@ -86,7 +86,7 @@ define (require) ->
 
     drafts: () ->
       @_checkedCounter = 0
-      results = searchResults.load({url:"#{WORKSPACE_URI}?media_type=application/vnd.org.cnx.module&state=Draft&contained_in=not:#{@model.id}"})
+      results = searchResults.load({url:"#{WORKSPACE_URI}?mediaType=application/vnd.org.cnx.module&state=Draft&containedIn=not:#{@model.id}"})
       @regions.results.show(new AddPageSearchResultsView({model: results}))
 
 
